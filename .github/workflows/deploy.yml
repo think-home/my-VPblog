@@ -40,7 +40,7 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: Install dependencies (安装依赖)
-        run: npm ci # 类似于 npm install，但在自动化环境中更稳
+        run: npm install
 
       - name: Build with VitePress (开始构建)
         run: npm run docs:build # 这里对应你 package.json 里的构建命令

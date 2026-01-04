@@ -1,0 +1,26 @@
+{
+  "name": "my-vitepress-blog",
+  "version": "1.0.0",
+  "description": "一个基于 VitePress 的技术博客",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview",
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "keywords": [
+    "vitepress",
+    "blog",
+    "documentation",
+    "markdown"
+  ],
+  "author": "Wesley",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "vitepress": "^1.6.4"
+  }
+}

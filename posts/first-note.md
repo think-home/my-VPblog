@@ -27,9 +27,7 @@ VitePress 是一个基于 Vite 的静态站点生成器，具有以下优势：
 - 记录踩坑经验
 
 ---
-<<<<<<< HEAD
 hello123
 =======
 hello
->>>>>>> 69f963d (first-commit)
 *写于 2024年*

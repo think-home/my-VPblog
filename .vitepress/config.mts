@@ -48,11 +48,10 @@ export default defineConfig({
     },
     // 【新增 3】显示"在 GitHub 上编辑此页"链接
     // 方便读者纠错，也显得很极客
-    // 注意：请将下面的 pattern 替换为你的实际 GitHub 仓库地址
-    // editLink: {
-    //   pattern: 'https://github.com/think-home/my-vitepress-blog/edit/main/:path',
-    //   text: '在 GitHub 上编辑此页'
-    // },
+    editLink: {
+      pattern: 'https://github.com/think-home/my-VPblog/edit/main/:path',
+      text: '在 GitHub 上编辑此页'
+    },
 
     // 3. 社交链接图标
     socialLinks: [

@@ -1,0 +1,64 @@
+# 构建并部署 VitePress 到 GitHub Pages
+name: Deploy VitePress site to Pages
+
+on:
+  # 在推送到 main 分支时触发构建
+  push:
+    branches: [main]
+
+  # 允许你从 Actions 页面手动触发构建
+  workflow_dispatch:
+
+# 设置 GITHUB_TOKEN 的权限，允许部署到 Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 只允许同时进行一次部署，跳过正在进行的部署
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  # 构建工作
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (拉取代码)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 如果你开启了 lastUpdated (最后更新时间) 功能，这一行是必须的
+
+      - name: Setup Node (安装 Node.js)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm # 开启缓存，让下次构建更快
+
+      - name: Setup Pages (初始化 Pages)
+        uses: actions/configure-pages@v4
+
+      - name: Install dependencies (安装依赖)
+        run: npm ci # 类似于 npm install，但在自动化环境中更稳
+
+      - name: Build with VitePress (开始构建)
+        run: npm run docs:build # 这里对应你 package.json 里的构建命令
+
+      - name: Upload artifact (上传构建产物)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .vitepress/dist # 注意：这是 VitePress 默认的打包输出目录
+
+  # 部署工作
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Deploy to GitHub Pages (发布上线)
+        id: deployment
+        uses: actions/deploy-pages@v4
